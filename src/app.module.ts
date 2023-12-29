@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TodosModule } from './modules/todos.module';
 
 @Module({
   imports: [
@@ -7,8 +8,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       type: 'sqlite',
       database: 'db/sqlitedb.db',
       synchronize: true,
-      entities: ['src/entities/*.entity.ts'],
+      // entities: ['src/entities/*.entity.ts'],
+      entities: [__dirname + '/**/*.model{.ts,.js}'],
     }),
+    TodosModule,
   ],
   // controllers: [AppController],
   // providers: [AppService],
