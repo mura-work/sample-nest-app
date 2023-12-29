@@ -1,5 +1,4 @@
-import { TodoStatus } from '@/models/todos.model';
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class UpdateTodoInput {
   @IsString()
@@ -10,7 +9,7 @@ export class UpdateTodoInput {
   @IsOptional()
   title?: string;
 
-  @IsEnum(TodoStatus)
+  @IsString()
   @IsOptional()
-  status?: TodoStatus;
+  status?: string;
 }

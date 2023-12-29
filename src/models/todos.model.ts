@@ -1,10 +1,10 @@
 // eslint-disable-next-line prettier/prettier
 import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-export enum TodoStatus {
-  waiting = 'waiting',
-  done = 'done',
-}
+// export enum TodoStatus {
+//   waiting = 'waiting',
+//   done = 'done',
+// }
 
 @Entity('todos')
 export class TodosModel extends BaseEntity {
@@ -14,8 +14,8 @@ export class TodosModel extends BaseEntity {
   @Column({ type: 'varchar' })
   title: string;
 
-  @Column({ type: 'enum', enum: TodoStatus })
-  status: TodoStatus;
+  @Column({ type: 'varchar' })
+  status: string;
 
   @CreateDateColumn()
   created_at: Date;
