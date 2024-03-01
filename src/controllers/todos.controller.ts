@@ -3,7 +3,15 @@ import { UpdateTodoInput } from '@/dto/update-todo.input';
 import { TodosModel } from '@/models/todos.model';
 import { TodosService } from '@/services/todos.service';
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+} from '@nestjs/common';
 import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 
 @Controller('todo')

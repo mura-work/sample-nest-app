@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodosModule } from './modules/todos.module';
+import { CompaniesMoudle } from './modules/companies.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { TodosModule } from './modules/todos.module';
       entities: [__dirname + '/**/*.model{.ts,.js}'],
     }),
     TodosModule,
+    CompaniesMoudle,
   ],
   // controllers: [AppController],
   // providers: [AppService],
