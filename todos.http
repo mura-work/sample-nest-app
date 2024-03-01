@@ -1,8 +1,8 @@
 ### 全件取得
-GET http://localhost:3001/todo
+GET http://localhost:3002/todo
 
 ### 1件追加
-POST http://localhost:3001/todo
+POST http://localhost:3002/todo
 Content-Type: application/json
 
 {
@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### 1件更新
-PUT http://localhost:3001/todo
+PUT http://localhost:3002/todo
 Content-Type: application/json
 
 {
@@ -21,4 +21,4 @@ Content-Type: application/json
 }
 
 ### 1件削除
-DELETE http://localhost:3001/todo/:id
+DELETE http://localhost:3002/todo/:id
