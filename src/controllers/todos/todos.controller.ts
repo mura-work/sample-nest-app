@@ -14,13 +14,19 @@ import {
 } from '@nestjs/common';
 import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 
-@Controller('todo')
+@Controller('api/v1')
 export class TodosController {
   constructor(private readonly todoService: TodosService) {}
 
-  @Get()
+  @Get('/todos')
   readAllTodos(): Promise<TodosModel[]> {
     return this.todoService.readAllTodos();
+  }
+
+  @Get('/todo/:id')
+  async findOne(@Param('id') id: string) {
+    const data = await this.todoService.findOneById(id);
+    return data;
   }
 
   @Post()
