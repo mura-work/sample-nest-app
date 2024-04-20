@@ -1,0 +1,20 @@
+@startuml ""
+
+skinparam monochrome true
+
+actor User as U
+participant "Controller" as C
+participant "Service" as S
+participant "Repository" as R
+database Database as DB
+
+U -> C: データ登録リクエスト送信
+C -> S: データ登録リクエスト送信
+S -> R: データ登録リクエスト送信
+R -> DB: データ保存
+DB --> R: データ保存完了
+R --> S: データ保存完了
+S --> C: データ保存完了
+C --> U: データ保存完了
+
+@enduml

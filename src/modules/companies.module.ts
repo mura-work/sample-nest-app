@@ -1,4 +1,4 @@
-import { CompanyController } from '@/controllers/companies.controller';
+import { CompanyController } from '@/controllers/companies/companies.controller';
 import { CompanyModel } from '@/models/company.model';
 import { CompaniesService } from '@/services/companies.service';
 import { Module } from '@nestjs/common';

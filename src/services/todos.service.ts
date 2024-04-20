@@ -17,6 +17,11 @@ export class TodosService {
     return selectedTodos;
   }
 
+  async findOneById(id: string): Promise<TodosModel> {
+    const todo = await this.todosRepository.findOne({ where: { id } });
+    return todo;
+  }
+
   async createTodo(input: CreateTodoInput): Promise<InsertResult> {
     const createdTodos = await this.todosRepository.insert(input);
     return createdTodos;
