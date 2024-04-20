@@ -5,6 +5,7 @@ import { CompaniesMoudle } from './modules/companies.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { BooksModule } from './modules/books.module';
 
 @Module({
   imports: [
@@ -22,8 +23,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
     }),
     TodosModule,
     CompaniesMoudle,
+    BooksModule,
   ],
-  // controllers: [AppController],
-  // providers: [AppService],
 })
 export class AppModule {}

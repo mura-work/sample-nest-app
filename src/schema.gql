@@ -15,7 +15,28 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type BookModel {
+  id: String!
+  title: String!
+  content: String!
+  price: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   getTodos: [TodosModel!]!
   getTodo(todoId: String!): TodosModel!
+  getBooks: [BookModel!]!
+  getBook(bookId: Float!): BookModel!
+}
+
+type Mutation {
+  createBook(input: CreateBookInput!): BookModel!
+}
+
+input CreateBookInput {
+  title: String!
+  price: Float!
+  content: String!
 }

@@ -1,17 +1,16 @@
-// eslint-disable-next-line prettier/prettier
 import { Field, ObjectType } from '@nestjs/graphql';
 import {
+  Entity,
   BaseEntity,
+  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @ObjectType()
-@Entity('todos')
-export class TodosModel extends BaseEntity {
+@Entity('books')
+export class BookModel extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => String)
   id: string;
@@ -22,13 +21,17 @@ export class TodosModel extends BaseEntity {
 
   @Column({ type: 'varchar' })
   @Field(() => String)
-  status: string;
+  content: string;
+
+  @Column({ type: 'int' })
+  @Field(() => Number)
+  price: number;
 
   @CreateDateColumn()
   @Field()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
   @Field()
-  updated_at: Date;
+  updatedAt: Date;
 }
