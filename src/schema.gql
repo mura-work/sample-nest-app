@@ -6,8 +6,8 @@ type TodosModel {
   id: String!
   title: String!
   status: String!
-  created_at: DateTime!
-  updated_at: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """
