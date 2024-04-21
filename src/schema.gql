@@ -27,8 +27,13 @@ type Todo {
 type Query {
   getBooks: [BookModel!]!
   getBook(bookId: Float!): BookModel!
-  getTodos: [Todo!]!
+  getTodos(filter: TodosFilter): [Todo!]!
   getTodo(todoId: String!): Todo
+}
+
+input TodosFilter {
+  title: String
+  status: String
 }
 
 type Mutation {
