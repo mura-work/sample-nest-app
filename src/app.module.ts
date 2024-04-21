@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TodosModule } from './modules/todos.module';
 import { CompaniesMoudle } from './modules/companies.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { BooksModule } from './modules/books.module';
+import { TodoResolverModule } from './controllers/todos/todo.resolver.module';
+import { PrismaServiceModule } from './libs/infrastructure/repository/prisma.service.module';
 
 @Module({
   imports: [
@@ -21,9 +22,10 @@ import { BooksModule } from './modules/books.module';
       // entities: ['src/entities/*.entity.ts'],
       entities: [__dirname + '/**/*.model{.ts,.js}'],
     }),
-    TodosModule,
     CompaniesMoudle,
     BooksModule,
+    TodoResolverModule,
+    PrismaServiceModule,
   ],
 })
 export class AppModule {}
