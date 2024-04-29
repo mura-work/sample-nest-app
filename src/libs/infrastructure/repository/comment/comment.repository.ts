@@ -18,7 +18,6 @@ export class CommentRepository implements ICommentRepository {
         },
       })
       .then((r) => new CommentDto(r));
-    console.log({ result });
     return result;
   }
 }

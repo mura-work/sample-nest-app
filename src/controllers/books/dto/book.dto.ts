@@ -1,4 +1,4 @@
-import { BookModel } from '@/models/book.model';
+import { Book } from '@/libs/domain/book/book.entity';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { GraphQLInt } from 'graphql';
 
@@ -22,7 +22,7 @@ export class BookDto {
   @Field()
   readonly updatedAt: Date;
 
-  constructor(entity: BookModel) {
+  constructor(entity: Book) {
     this.id = Number(entity.id);
     this.title = entity.title;
     this.content = entity.content;

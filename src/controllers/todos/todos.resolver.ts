@@ -1,14 +1,9 @@
 import { TodoApplicationService } from '@/application-service/todo/todo.application-service';
 import { Todo } from '@/libs/domain/todo/todo.entity';
 import { PrismaService } from '@/libs/infrastructure/repository/prisma.service';
-import { todoRecordToEntity } from '@/libs/infrastructure/repository/todo/record-to-entity';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { TodoDto } from './dto/todo.dto';
-import {
-  TodosFilter,
-  TodosFilterDto,
-  todosFilterSchema,
-} from './dto/todos-filter.dto';
+import { TodosFilter, TodosFilterDto } from './dto/todos-filter.dto';
 import type { ReadonlyDeep } from 'type-fest';
 import { TodosQueryService } from '@/query-service/todo.query-service';
 
@@ -35,7 +30,7 @@ export class TodosResolver {
     return todoList.map((user) => new TodoDto(user));
   }
 
-  @Query((returns) => TodoDto, { nullable: true })
+  @Query(() => TodoDto, { nullable: true })
   async getTodo(@Args('todoId') id: string): Promise<Todo> {
     return await this.todoApplicationService.findById(id);
   }

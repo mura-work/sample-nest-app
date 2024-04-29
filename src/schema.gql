@@ -2,13 +2,32 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type BookModel {
-  id: String!
-  title: String!
+type BookDto {
   content: String!
-  price: Float!
   createdAt: DateTime!
+  id: Int!
+  price: Int!
+  title: String!
   updatedAt: DateTime!
+}
+
+type CommentDto {
+  bookId: Int!
+  content: String!
+  createdAt: DateTime!
+  id: Int!
+  updatedAt: DateTime!
+}
+
+input CreateBookInput {
+  content: String!
+  price: Int!
+  title: String!
+}
+
+input CreateCommentInput {
+  bookId: Int!
+  content: String!
 }
 
 """
@@ -16,47 +35,28 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type Todo {
-  id: String!
-  title: String!
-  status: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type CommentDto {
-  id: Int!
-  content: String!
-  bookId: Int!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type Query {
-  getBooks: [BookModel!]!
-  getBook(bookId: Float!): BookModel!
-  getTodos(filter: TodosFilter): [Todo!]!
-  getTodo(todoId: String!): Todo
-  comments: [CommentDto!]!
-}
-
-input TodosFilter {
-  title: String
-  status: String
-}
-
 type Mutation {
-  createBook(input: CreateBookInput!): BookModel!
+  createBook(input: CreateBookInput!): BookDto!
   createComment(inputComment: CreateCommentInput!): CommentDto!
 }
 
-input CreateBookInput {
-  title: String!
-  price: Int!
-  content: String!
+type Query {
+  comments: [CommentDto!]!
+  getBook(bookId: Float!): BookDto!
+  getBooks: [BookDto!]!
+  getTodo(todoId: String!): Todo
+  getTodos(filter: TodosFilter): [Todo!]!
 }
 
-input CreateCommentInput {
-  content: String!
-  bookId: Int!
+type Todo {
+  createdAt: DateTime!
+  id: String!
+  status: String!
+  title: String!
+  updatedAt: DateTime!
+}
+
+input TodosFilter {
+  status: String
+  title: String
 }
