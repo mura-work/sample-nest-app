@@ -1,24 +1,24 @@
 import { CreateBookInput } from '@/dto/input-book.input';
-import { BookModel } from '@/models/book.model';
 import { BooksService } from '@/services/books.service';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { BookDto } from './dto/book.dto';
 
 @Resolver()
-export class BooksResolver {
+export class BookResolver {
   constructor(private readonly bookService: BooksService) {}
 
-  @Query(() => Array(BookModel))
-  async getBooks(): Promise<BookModel[]> {
+  @Query(() => Array(BookDto))
+  async getBooks(): Promise<BookDto[]> {
     return await this.bookService.readAllBooks();
   }
 
-  @Query((returns) => BookModel)
-  async getBook(@Args('bookId') id: number): Promise<BookModel> {
+  @Query(() => BookDto)
+  async getBook(@Args('bookId') id: number): Promise<BookDto> {
     return await this.bookService.findBook(id);
   }
 
-  @Mutation(() => BookModel)
-  async createBook(@Args('input') input: CreateBookInput): Promise<BookModel> {
+  @Mutation(() => BookDto)
+  async createBook(@Args('input') input: CreateBookInput): Promise<BookDto> {
     return await this.bookService.create(input);
   }
 }

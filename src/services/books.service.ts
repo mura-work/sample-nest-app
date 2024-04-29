@@ -1,31 +1,36 @@
+import { BookDto } from '@/controllers/books/dto/book.dto';
 import { CreateBookInput } from '@/dto/input-book.input';
-import { BookModel } from '@/models/book.model';
+import { PrismaService } from '@/libs/infrastructure/repository/prisma.service';
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class BooksService {
-  constructor(
-    @InjectRepository(BookModel)
-    private readonly bookRepository: Repository<BookModel>,
-  ) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
-  async readAllBooks(): Promise<BookModel[]> {
-    return await this.bookRepository.find();
+  async readAllBooks(): Promise<BookDto[]> {
+    return await this.prismaService.book.findMany({
+      orderBy: [{ id: 'asc' }],
+    });
   }
 
-  async findBook(id: number): Promise<BookModel> {
-    return await this.bookRepository.findOneById(id);
+  async findBook(id: number): Promise<BookDto> {
+    // return await this.bookRepository.findOneById(id);
+    const result = await this.prismaService.book
+      .findFirst({ where: { id } })
+      .then((res) => (res == null ? null : new BookDto(res)));
+    return result;
   }
 
-  async create(data: CreateBookInput): Promise<BookModel> {
-    const book = new BookModel();
-    book.title = data.title;
-    book.content = data.content;
-    book.price = data.price;
-    const createdBook = this.bookRepository.create(book);
-    await this.bookRepository.save(book);
+  async create(data: CreateBookInput) {
+    const createdBook = this.prismaService.book
+      .create({
+        data: {
+          title: data.title,
+          content: data.content,
+          price: data.price,
+        },
+      })
+      .then((r) => new BookDto(r));
     return createdBook;
   }
 }
