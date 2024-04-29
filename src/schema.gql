@@ -25,9 +25,9 @@ type Todo {
 }
 
 type CommentDto {
-  id: String!
+  id: Int!
   content: String!
-  bookId: Float!
+  bookId: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -47,10 +47,16 @@ input TodosFilter {
 
 type Mutation {
   createBook(input: CreateBookInput!): BookModel!
+  createComment(inputComment: CreateCommentInput!): CommentDto!
 }
 
 input CreateBookInput {
   title: String!
-  price: Float!
+  price: Int!
   content: String!
+}
+
+input CreateCommentInput {
+  content: String!
+  bookId: Int!
 }

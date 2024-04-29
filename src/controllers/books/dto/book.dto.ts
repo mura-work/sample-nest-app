@@ -1,17 +1,20 @@
-import { Comment } from '@/libs/domain/comment/comment.entity';
+import { BookModel } from '@/models/book.model';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { GraphQLInt } from 'graphql';
 
 @ObjectType()
-export class CommentDto {
+export class BookDto {
   @Field(() => GraphQLInt)
   readonly id: number;
+
+  @Field()
+  readonly title: string;
 
   @Field()
   readonly content: string;
 
   @Field(() => GraphQLInt)
-  readonly bookId: number;
+  readonly price: number;
 
   @Field()
   readonly createdAt: Date;
@@ -19,10 +22,11 @@ export class CommentDto {
   @Field()
   readonly updatedAt: Date;
 
-  constructor(entity: Comment) {
-    this.id = entity.id;
+  constructor(entity: BookModel) {
+    this.id = Number(entity.id);
+    this.title = entity.title;
     this.content = entity.content;
-    this.bookId = entity.bookId;
+    this.price = entity.price;
     this.createdAt = entity.createdAt;
     this.updatedAt = entity.updatedAt;
   }

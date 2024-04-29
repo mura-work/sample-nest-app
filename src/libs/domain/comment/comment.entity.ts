@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const commentSchema = z
   .object({
-    id: z.string(),
+    id: z.number(),
     content: z.string(),
     bookId: z.number(),
     createdAt: z.date().nullable(), // NOTE: DB インサート時の値を入れたいので新規作成時 null を入れる

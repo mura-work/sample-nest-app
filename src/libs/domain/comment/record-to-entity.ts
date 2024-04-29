@@ -3,7 +3,7 @@ import { Comment } from '@/libs/domain/comment/comment.entity';
 
 export const commentRecordToEntity = (resource: PrismaComment): Comment => {
   return {
-    id: String(resource.id),
+    id: resource.id,
     content: resource.content,
     bookId: resource.bookId,
     createdAt: resource.createdAt,

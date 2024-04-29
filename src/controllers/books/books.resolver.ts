@@ -2,6 +2,7 @@ import { CreateBookInput } from '@/dto/input-book.input';
 import { BookModel } from '@/models/book.model';
 import { BooksService } from '@/services/books.service';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { BookDto } from './dto/book.dto';
 
 @Resolver()
 export class BooksResolver {
@@ -12,8 +13,8 @@ export class BooksResolver {
     return await this.bookService.readAllBooks();
   }
 
-  @Query((returns) => BookModel)
-  async getBook(@Args('bookId') id: number): Promise<BookModel> {
+  @Query(() => BookModel)
+  async getBook(@Args('bookId') id: number): Promise<BookDto> {
     return await this.bookService.findBook(id);
   }
 
