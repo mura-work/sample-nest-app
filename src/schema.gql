@@ -24,11 +24,20 @@ type Todo {
   updatedAt: DateTime!
 }
 
+type CommentDto {
+  id: String!
+  content: String!
+  bookId: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   getBooks: [BookModel!]!
   getBook(bookId: Float!): BookModel!
   getTodos(filter: TodosFilter): [Todo!]!
   getTodo(todoId: String!): Todo
+  comments: [CommentDto!]!
 }
 
 input TodosFilter {
