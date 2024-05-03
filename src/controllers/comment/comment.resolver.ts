@@ -23,7 +23,6 @@ export class CommentResolver {
       content: input.content,
       bookId: input.bookId,
     });
-    // console.log({ result });
     return result;
   }
 }
