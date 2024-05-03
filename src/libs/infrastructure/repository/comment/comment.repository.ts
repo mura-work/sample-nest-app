@@ -20,4 +20,20 @@ export class CommentRepository implements ICommentRepository {
       .then((r) => new CommentDto(r));
     return result;
   }
+
+  async findManyByBookIds(bookIds: readonly string[]) {
+    const numbersBookIds = [...bookIds].map((id) => Number(id));
+
+    const commentsForBooks = await this.prismaService.comment.findMany({
+      where: { bookId: { in: numbersBookIds } },
+    });
+    const result = numbersBookIds.reduce((acc, bookId) => {
+      acc[bookId] = commentsForBooks.filter(
+        (comment) => comment.bookId === bookId,
+      );
+      return acc;
+    }, {});
+
+    return result;
+  }
 }

@@ -1,9 +1,17 @@
 import { CreateBookInput } from '@/dto/input-book.input';
 import { BooksService } from '@/services/books.service';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { BookDto } from './dto/book.dto';
+import { CommentDto } from '../comment/dto/comment.dto';
 
-@Resolver()
+@Resolver(() => BookDto)
 export class BookResolver {
   constructor(private readonly bookService: BooksService) {}
 
@@ -15,6 +23,12 @@ export class BookResolver {
   @Query(() => BookDto)
   async getBook(@Args('bookId') id: number): Promise<BookDto> {
     return await this.bookService.findBook(id);
+  }
+
+  @ResolveField(() => [CommentDto])
+  async comments(@Parent() { id: bookId }: BookDto) {
+    console.log({ bookId });
+    return [];
   }
 
   @Mutation(() => BookDto)
