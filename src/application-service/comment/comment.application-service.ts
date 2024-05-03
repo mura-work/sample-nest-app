@@ -1,10 +1,10 @@
-import { CommentRepository } from '@/libs/infrastructure/repository/comment/comment.repository';
 import { Injectable } from '@nestjs/common';
 import { CommentCreateInput } from './comment.application-service.type';
+import { ICommentRepository } from '@/libs/domain/comment/comment.repository.interface';
 
 @Injectable()
 export class CommentApplicationService {
-  constructor(private readonly commentRepository: CommentRepository) {}
+  constructor(private readonly commentRepository: ICommentRepository) {}
 
   async create(input: CommentCreateInput) {
     const { content, bookId } = input;
