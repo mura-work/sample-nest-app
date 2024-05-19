@@ -20,12 +20,12 @@ export class BookResolver {
   ) {}
 
   @Query(() => Array(BookDto))
-  async getBooks(): Promise<BookDto[]> {
+  async books(): Promise<BookDto[]> {
     return await this.bookService.readAllBooks();
   }
 
   @Query(() => BookDto)
-  async getBook(@Args('bookId') id: number): Promise<BookDto> {
+  async book(@Args('bookId') id: number): Promise<BookDto> {
     return await this.bookService.findBook(id);
   }
 

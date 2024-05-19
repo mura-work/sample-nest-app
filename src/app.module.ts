@@ -20,13 +20,6 @@ const CoreModules = [
     sortSchema: true,
     playground: true,
   }),
-  // TypeOrmModule.forRoot({
-  //   type: 'sqlite',
-  //   database: 'db/sqlitedb.db',
-  //   synchronize: true,
-  //   // entities: ['src/entities/*.entity.ts'],
-  //   entities: [__dirname + '/**/*.model{.ts,.js}'],
-  // }),
   PrismaServiceModule,
 ];
 

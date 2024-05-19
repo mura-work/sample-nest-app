@@ -42,11 +42,11 @@ type Mutation {
 }
 
 type Query {
+  book(bookId: Float!): BookDto!
+  books: [BookDto!]!
   comments: [CommentDto!]!
-  getBook(bookId: Float!): BookDto!
-  getBooks: [BookDto!]!
-  getTodo(todoId: String!): Todo
-  getTodos(filter: TodosFilter): [Todo!]!
+  todo(todoId: String!): Todo
+  todos(filter: TodosFilter): [Todo!]!
 }
 
 type Todo {

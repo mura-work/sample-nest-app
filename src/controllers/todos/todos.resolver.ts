@@ -16,7 +16,7 @@ export class TodosResolver {
   ) {}
 
   @Query(() => Array(TodoDto))
-  async getTodos(
+  async todos(
     @Args('filter', { type: () => TodosFilterDto, nullable: true })
     filter: ReadonlyDeep<TodosFilter>,
   ): Promise<Todo[]> {
@@ -31,7 +31,7 @@ export class TodosResolver {
   }
 
   @Query(() => TodoDto, { nullable: true })
-  async getTodo(@Args('todoId') id: string): Promise<Todo> {
+  async todo(@Args('todoId') id: string): Promise<Todo> {
     return await this.todoApplicationService.findById(id);
   }
 }
