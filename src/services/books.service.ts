@@ -1,4 +1,4 @@
-import { BookDto } from '@/controllers/books/dto/book.dto';
+import { BookDto } from '@/resolver/books/dto/book.dto';
 import { CreateBookInput } from '@/dto/input-book.input';
 import { PrismaService } from '@/libs/infrastructure/repository/prisma.service';
 import { Injectable } from '@nestjs/common';
