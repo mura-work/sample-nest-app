@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { TodoResolverModule } from './controllers/todos/todo.resolver.module';
+import { TodoResolverModule } from './resolver/todos/todo.resolver.module';
 import { PrismaServiceModule } from './libs/infrastructure/repository/prisma.service.module';
-import { CommentResolverModule } from './controllers/comment/comment.resolver.module';
-import { BookResolverModule } from './controllers/books/book.resolver.module';
+import { CommentResolverModule } from './resolver/comment/comment.resolver.module';
+import { BookResolverModule } from './resolver/books/book.resolver.module';
 
 const ResolverModules = [
   BookResolverModule,
@@ -20,13 +20,6 @@ const CoreModules = [
     sortSchema: true,
     playground: true,
   }),
-  // TypeOrmModule.forRoot({
-  //   type: 'sqlite',
-  //   database: 'db/sqlitedb.db',
-  //   synchronize: true,
-  //   // entities: ['src/entities/*.entity.ts'],
-  //   entities: [__dirname + '/**/*.model{.ts,.js}'],
-  // }),
   PrismaServiceModule,
 ];
 
