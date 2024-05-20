@@ -1,5 +1,4 @@
 import { CreateBookInput } from '@/dto/input-book.input';
-import { BooksService } from '@/services/books.service';
 import {
   Args,
   Mutation,
@@ -11,11 +10,12 @@ import {
 import { BookDto } from './dto/book.dto';
 import { CommentDto } from '../comment/dto/comment.dto';
 import { CommentsByBookIdDataLoader } from '@/libs/infrastructure/data-loader/comments/comments-by-book-id.dataloader';
+import { BookApplicationService } from '@/application-service/book/book.application-service';
 
 @Resolver(() => BookDto)
 export class BookResolver {
   constructor(
-    private readonly bookService: BooksService,
+    private readonly bookService: BookApplicationService,
     private readonly commentsByBookIdDataLoader: CommentsByBookIdDataLoader,
   ) {}
 

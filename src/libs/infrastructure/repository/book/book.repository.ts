@@ -7,17 +7,17 @@ import { Book } from '@/libs/domain/book/book.entity';
 export class BookRepository implements IBookRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async update(id: number, title: string, content: string): Promise<Book> {
-    if (!title || !content) {
+  async update(book: Book): Promise<Book> {
+    if (!book.title || !book.content) {
       return;
     }
 
     const result = await this.prismaService.book
       .update({
-        where: { id },
+        where: { id: book.id },
         data: {
-          title,
-          content,
+          title: book.title,
+          content: book.content,
         },
       })
       .then((r) => this.toEntity(r));
