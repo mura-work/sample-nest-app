@@ -2,14 +2,14 @@ import { BookDto } from '@/resolver/books/dto/book.dto';
 import { CreateBookInput } from '@/dto/input-book.input';
 import { PrismaService } from '@/libs/infrastructure/repository/prisma.service';
 import { Injectable } from '@nestjs/common';
-import { BookRepository } from '@/libs/infrastructure/repository/book/book.repository';
 import { UpdateBookInput } from './book.application-service.type';
+import { IBookRepository } from '@/libs/domain/book/book.repository.interface';
 
 @Injectable()
 export class BookApplicationService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly repository: BookRepository,
+    private readonly repository: IBookRepository,
   ) {}
 
   async readAllBooks(): Promise<BookDto[]> {
