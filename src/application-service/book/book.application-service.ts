@@ -2,10 +2,15 @@ import { BookDto } from '@/resolver/books/dto/book.dto';
 import { CreateBookInput } from '@/dto/input-book.input';
 import { PrismaService } from '@/libs/infrastructure/repository/prisma.service';
 import { Injectable } from '@nestjs/common';
+import { UpdateBookInput } from './book.application-service.type';
+import { IBookRepository } from '@/libs/domain/book/book.repository.interface';
 
 @Injectable()
-export class BooksService {
-  constructor(private readonly prismaService: PrismaService) {}
+export class BookApplicationService {
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly repository: IBookRepository,
+  ) {}
 
   async readAllBooks(): Promise<BookDto[]> {
     return await this.prismaService.book.findMany({
@@ -14,7 +19,6 @@ export class BooksService {
   }
 
   async findBook(id: number): Promise<BookDto> {
-    // return await this.bookRepository.findOneById(id);
     const result = await this.prismaService.book
       .findFirst({ where: { id } })
       .then((res) => (res == null ? null : new BookDto(res)));
@@ -32,5 +36,20 @@ export class BooksService {
       })
       .then((r) => new BookDto(r));
     return createdBook;
+  }
+
+  async update(input: UpdateBookInput) {
+    const { id, title, content } = input;
+    const targetBook = await this.findBook(id);
+    if (targetBook == null) {
+      return;
+    }
+
+    const updatedBook = this.repository.update({
+      ...targetBook,
+      title,
+      content,
+    });
+    return updatedBook;
   }
 }

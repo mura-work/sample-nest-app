@@ -39,6 +39,7 @@ scalar DateTime
 type Mutation {
   createBook(input: CreateBookInput!): BookDto!
   createComment(inputComment: CreateCommentInput!): CommentDto!
+  updateBook(input: UpdateBookInputDto!): UpdateBookOutputDto!
 }
 
 type Query {
@@ -60,4 +61,17 @@ type Todo {
 input TodosFilter {
   status: String
   title: String
+}
+
+input UpdateBookInputDto {
+  content: String!
+  id: Float!
+  title: String!
+}
+
+type UpdateBookOutputDto {
+  content: String!
+  id: Float!
+  price: Int!
+  title: String!
 }
