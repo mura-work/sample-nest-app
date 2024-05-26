@@ -41,4 +41,12 @@ export class CategoryRepository implements ICategoryRepository {
       },
     });
   }
+
+  async delete(id: number): Promise<void> {
+    return await this.prismaService.category
+      .delete({
+        where: { id },
+      })
+      .then();
+  }
 }

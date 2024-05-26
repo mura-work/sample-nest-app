@@ -118,4 +118,15 @@ describe('CategoryRepository', () => {
       expect(result.isActive).toBe(targetCategory.isActive);
     });
   });
+
+  describe('delete', () => {
+    it('カテゴリの削除', async () => {
+      const category = await testDataFactory.category.create({
+        name: 'テスト1',
+      });
+      await repository.delete(category.id);
+      const result = await repository.findById(category.id);
+      expect(result).toBeNull();
+    });
+  });
 });
