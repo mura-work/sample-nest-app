@@ -66,6 +66,28 @@ async function main() {
       });
     }),
   );
+
+  console.log('カテゴリのインサート');
+  await Promise.all(
+    [
+      'Biz',
+      '調査',
+      '企画',
+      'マーケ',
+      'デザイン',
+      '設計',
+      '実装',
+      'テスト',
+      'デプロイ',
+      '保守・運用',
+    ].map(async (name) => {
+      await prisma.category.create({
+        data: {
+          name,
+        },
+      });
+    }),
+  );
 }
 
 main()
