@@ -81,4 +81,22 @@ describe('CategoryRepository', () => {
       expect(result).toEqual([]);
     });
   });
+
+  describe('create', () => {
+    it('カテゴリが保存できるか', async () => {
+      const category = await testDataFactory.category.create({
+        name: 'テスト1',
+      });
+      const beforeCategory = await repository.findById(category.id);
+
+      const targetCategory = {
+        ...beforeCategory,
+        name: 'テスト2',
+        isActive: false,
+      };
+      const result = await repository.create(targetCategory);
+      expect(result.name).toBe(targetCategory.name);
+      expect(result.isActive).toBe(targetCategory.isActive);
+    });
+  });
 });

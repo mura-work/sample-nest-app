@@ -21,18 +21,12 @@ export class CategoryRepository implements ICategoryRepository {
     });
   }
 
-  async create(
-    category: Readonly<{
-      id?: number;
-      name?: string;
-      isActive?: boolean;
-      completionDate?: Date;
-      createdAt?: Date;
-      updatedAt?: Date;
-    }>,
-  ): Promise<Category> {
-    return await this.prismaService.category.findUnique({
-      where: { id: 1 },
+  async create(category: Category): Promise<Category> {
+    return await this.prismaService.category.create({
+      data: {
+        name: category.name,
+        isActive: category.isActive,
+      },
     });
   }
 }
