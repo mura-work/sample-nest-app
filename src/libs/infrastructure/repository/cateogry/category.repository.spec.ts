@@ -6,6 +6,7 @@ import { INestApplication } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { CategoryRepository } from './category.repository';
 import { TestingModule, Test } from '@nestjs/testing';
+import { resetTable } from '../../../tests/reset-table';
 
 describe('CategoryRepository', () => {
   let app: INestApplication;
@@ -23,6 +24,10 @@ describe('CategoryRepository', () => {
       await moduleRef.resolve<CategoryRepository>(CategoryRepository);
     prismaService = await moduleRef.resolve<PrismaService>(PrismaService);
     testDataFactory = testDataFactoryBuilder(prismaService);
+  });
+
+  afterEach(async () => {
+    await resetTable(prismaService);
   });
 
   afterAll(async () => {
