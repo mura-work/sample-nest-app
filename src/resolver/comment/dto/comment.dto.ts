@@ -2,7 +2,7 @@ import { Comment } from '@/libs/domain/comment/comment.entity';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { GraphQLInt } from 'graphql';
 
-@ObjectType()
+@ObjectType('Comment')
 export class CommentDto {
   @Field(() => GraphQLInt)
   readonly id: number;

@@ -2,7 +2,7 @@ import { Book } from '@/libs/domain/book/book.entity';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { GraphQLInt } from 'graphql';
 
-@ObjectType()
+@ObjectType('Book')
 export class BookDto {
   @Field(() => GraphQLInt)
   readonly id: number;
