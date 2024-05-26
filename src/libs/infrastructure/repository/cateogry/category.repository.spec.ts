@@ -84,10 +84,9 @@ describe('CategoryRepository', () => {
 
   describe('create', () => {
     it('カテゴリが保存できるか', async () => {
-      const category = await testDataFactory.category.create({
+      const beforeCategory = await testDataFactory.category.create({
         name: 'テスト1',
       });
-      const beforeCategory = await repository.findById(category.id);
 
       const targetCategory = {
         ...beforeCategory,
@@ -102,17 +101,16 @@ describe('CategoryRepository', () => {
 
   describe('update', () => {
     it('カテゴリが更新できるか', async () => {
-      const category = await testDataFactory.category.create({
+      const beforeCategory = await testDataFactory.category.create({
         name: 'テスト1',
       });
-      const beforeCategory = await repository.findById(category.id);
-      const createdCategory = await repository.create(beforeCategory);
 
       const targetCategory = {
-        ...createdCategory,
+        ...beforeCategory,
         name: '更新後テスト1',
         isActive: false,
       };
+
       const result = await repository.update(targetCategory);
       expect(result.name).toBe(targetCategory.name);
       expect(result.isActive).toBe(targetCategory.isActive);
