@@ -84,10 +84,9 @@ describe('CategoryRepository', () => {
 
   describe('create', () => {
     it('カテゴリが保存できるか', async () => {
-      const category = await testDataFactory.category.create({
+      const beforeCategory = await testDataFactory.category.create({
         name: 'テスト1',
       });
-      const beforeCategory = await repository.findById(category.id);
 
       const targetCategory = {
         ...beforeCategory,
@@ -97,6 +96,35 @@ describe('CategoryRepository', () => {
       const result = await repository.create(targetCategory);
       expect(result.name).toBe(targetCategory.name);
       expect(result.isActive).toBe(targetCategory.isActive);
+    });
+  });
+
+  describe('update', () => {
+    it('カテゴリが更新できるか', async () => {
+      const beforeCategory = await testDataFactory.category.create({
+        name: 'テスト1',
+      });
+
+      const targetCategory = {
+        ...beforeCategory,
+        name: '更新後テスト1',
+        isActive: false,
+      };
+
+      const result = await repository.update(targetCategory);
+      expect(result.name).toBe(targetCategory.name);
+      expect(result.isActive).toBe(targetCategory.isActive);
+    });
+  });
+
+  describe('delete', () => {
+    it('カテゴリの削除', async () => {
+      const category = await testDataFactory.category.create({
+        name: 'テスト1',
+      });
+      await repository.delete(category.id);
+      const result = await repository.findById(category.id);
+      expect(result).toBeNull();
     });
   });
 });
