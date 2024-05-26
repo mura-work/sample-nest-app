@@ -44,7 +44,6 @@ export class BookResolver {
 
   @Mutation(() => UpdateBookOutputDto)
   async updateBook(@Args('input') input: UpdateBookInputDto): Promise<Book> {
-    console.log('リゾルバ');
     return await this.applicationService.update(input);
   }
 }

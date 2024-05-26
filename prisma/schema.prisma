@@ -47,6 +47,18 @@ model Todo {
   id    Int     @default(autoincrement()) @id
   title String
   status String
+  description String?
+  completionDate DateTime
+  categories Category[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id    Int     @default(autoincrement()) @id
+  name String
+  isActive Boolean @default(true)
+  todoLists Todo[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
