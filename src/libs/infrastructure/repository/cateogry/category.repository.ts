@@ -29,4 +29,16 @@ export class CategoryRepository implements ICategoryRepository {
       },
     });
   }
+
+  async update(category: Category): Promise<Category> {
+    return await this.prismaService.category.update({
+      where: {
+        id: category.id,
+      },
+      data: {
+        name: category.name,
+        isActive: category.isActive,
+      },
+    });
+  }
 }
