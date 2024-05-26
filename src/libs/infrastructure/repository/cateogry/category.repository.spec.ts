@@ -52,4 +52,33 @@ describe('CategoryRepository', () => {
       expect(result).toBeNull();
     });
   });
+
+  describe('findAllByIds', () => {
+    it('指定されたidsに該当するカテゴリを全て取得できるか', async () => {
+      const categories = await Promise.all(
+        ['テスト1', 'テスト2', 'テスト3'].map((name) =>
+          testDataFactory.category.create({ name }),
+        ),
+      );
+      const ids = categories.map((c) => c.id);
+      const result = await repository.findAllByIds(ids);
+      expect(ids.some((id) => id === result[0].id)).toBeTruthy();
+      expect(ids.some((id) => id === result[1].id)).toBeTruthy();
+      expect(ids.some((id) => id === result[2].id)).toBeTruthy();
+    });
+    it('指定されていないidは含まれていないか', async () => {
+      const categories = await Promise.all(
+        ['テスト1', 'テスト2', 'テスト3'].map((name) =>
+          testDataFactory.category.create({ name }),
+        ),
+      );
+      const ids = categories.map((c) => c.id);
+      const result = await repository.findAllByIds(ids);
+      expect(result.some((c) => c.id === -100)).toBeFalsy();
+    });
+    it('空配列を渡した場合、エラーにならず空配列を返すか', async () => {
+      const result = await repository.findAllByIds([]);
+      expect(result).toEqual([]);
+    });
+  });
 });
